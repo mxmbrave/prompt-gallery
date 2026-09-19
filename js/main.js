@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     ["type", "type"], ["category", "category"], ["tag", "tag"],
     ["color", "color"], ["model", "model"], ["fav", "favorite"], ["q", "query"]
   ];
+  let detailIdFromURL = new URLSearchParams(location.search).get("id") || "";
   let searchTimer;
   let loadMoreTimer;
   let loadingMore = false;
@@ -38,12 +39,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function syncFiltersToURL() {
     const filters = Store.getFilters();
-    const query = urlFilters.flatMap(([parameter, key]) => {
+    const parameters = urlFilters.flatMap(([parameter, key]) => {
       const value = filters[key];
       // Store 用 all 表示全部类型，网址中省略这个默认值。
       if (!value || (key === "type" && value === "all")) return [];
       return [`${encodeURIComponent(parameter)}=${encodeURIComponent(value)}`];
-    }).join("&");
+    });
+    // 首页直达详情时，首次渲染及补齐分页期间保留 id。
+    if (detailIdFromURL) parameters.push(`id=${encodeURIComponent(detailIdFromURL)}`);
+    const query = parameters.join("&");
     const url = new URL(location.href);
     url.search = query ? `?${query}` : "";
     if (url.href === location.href) return;
@@ -91,6 +95,56 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadEnd.hidden = page.hasMore || visibleTotal === 0;
     updateSearchClear();
     syncFiltersToURL();
+  }
+
+  function openDetailFromURL() {
+    if (!detailIdFromURL) return;
+    const item = Store.getData().find((entry) => entry.id === detailIdFromURL);
+    if (!item) {
+      detailIdFromURL = "";
+      syncFiltersToURL();
+      return;
+    }
+
+    // 深链接优先展示目标卡片，仅清除与它冲突的筛选条件。
+    const filters = Store.getFilters();
+    const searchable = [item.title, item.prompt, item.promptZh, item.model,
+      item.category, item.author, ...Store.normalizeTags(item.tags)]
+      .join(" ").toLocaleLowerCase();
+    let changed = false;
+    function clearConflict(key, conflicts, reset = "") {
+      if (!conflicts) return;
+      Store.setFilter(key, reset);
+      changed = true;
+    }
+    clearConflict("query", filters.query && !searchable.includes(filters.query.trim().toLocaleLowerCase()));
+    clearConflict("type", filters.type !== "all" && filters.type !== item.type, "all");
+    clearConflict("category", filters.category && filters.category !== item.category);
+    clearConflict("tag", filters.tag && !Store.normalizeTags(item.tags).includes(filters.tag));
+    clearConflict("model", filters.model && filters.model !== item.model);
+    clearConflict("favorite", filters.favorite && !Favorites.isFavorite(item.id));
+    clearConflict("color", filters.color && !Store.matchesColor(item.colors, filters.color));
+    if (changed) {
+      searchInput.value = Store.getFilters().query;
+      render();
+    }
+
+    // 按真实展示集合计算页码：颜色未命中项仍占一张卡片。
+    const position = Store.getFiltered("color")
+      .findIndex((item) => item.id === detailIdFromURL);
+    const targetPage = position < 0 ? 1 : Math.floor(position / CONFIG.pageSize) + 1;
+    while (displayedPages < targetPage) render(true);
+    Detail.open(detailIdFromURL);
+
+    // Detail.close 在动画完成后才设置 hidden；此时移除 id，刷新不再弹出。
+    const overlay = document.getElementById("modal-overlay");
+    const observer = new MutationObserver(() => {
+      if (!overlay.hidden) return;
+      observer.disconnect();
+      detailIdFromURL = "";
+      syncFiltersToURL();
+    });
+    observer.observe(overlay, { attributes: true, attributeFilter: ["hidden"] });
   }
 
   function closeColorPanel(restoreFocus = true) {
@@ -291,11 +345,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     Store.setData(items);
     ready = true;
     render();
+    openDetailFromURL();
   } catch {
     // 接口异常也结束骨架屏，并给出可读提示。
     Store.setData([]);
     ready = true;
     render();
+    detailIdFromURL = "";
+    syncFiltersToURL();
     errorMessage.textContent = "提示词加载失败，请检查数据文件后刷新页面。";
     errorMessage.hidden = false;
   }

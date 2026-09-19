@@ -9,19 +9,54 @@
   <script src="js/config.js" defer></script>
   <script src="js/data.js" defer></script>
   <script src="js/store.js" defer></script>
+  <script src="js/cover.js" defer></script>
   <script src="js/favorites.js" defer></script>
+  <script src="js/home.js" defer></script>
   <script src="js/nav.js" defer></script>
 </head>
 <body>
   <header id="site-header" class="site-nav"></header>
 
-  <main class="container page-placeholder">
-    <h1>概览页，内容下一步实现</h1>
+  <main>
+    <section class="home-hero container" aria-labelledby="home-title">
+      <p class="eyebrow">图片 · 视频 · 提示词</p>
+      <h1 id="home-title">从一句提示词，开启创作。</h1>
+      <p class="home-subtitle muted">发现值得收藏的创作灵感，找到适合下一幅画面的一句话。</p>
+      <form id="home-search-form" class="home-search" role="search">
+        <label class="sr-only" for="home-search-input">搜索提示词</label>
+        <input id="home-search-input" type="search" placeholder="搜索提示词、风格、场景…" autocomplete="off">
+        <button class="button" type="submit">搜索</button>
+      </form>
+      <div class="home-quick-tags">
+        <span class="home-quick-label">热门标签</span>
+        <div id="home-quick-tags" class="home-quick-list" aria-label="热门标签"></div>
+      </div>
+    </section>
+
+    <section class="home-section container" aria-labelledby="home-featured-title">
+      <div class="home-section-heading">
+        <h2 id="home-featured-title">为你推荐</h2>
+        <a class="home-see-all" href="library.html">浏览全部 <span aria-hidden="true">→</span></a>
+      </div>
+      <div id="home-category-tabs" class="home-category-tabs" role="group" aria-label="推荐分类"></div>
+      <p id="home-error" class="error-message" role="alert" hidden></p>
+      <div id="home-featured-grid" class="home-grid" aria-busy="true"></div>
+    </section>
+
+    <section class="home-section container" aria-labelledby="home-browse-title">
+      <div class="home-section-heading"><h2 id="home-browse-title">按分类浏览</h2></div>
+      <div id="home-browse-list" class="home-browse-list"></div>
+    </section>
+
+    <section class="home-about container" aria-labelledby="home-about-title">
+      <h2 id="home-about-title">把灵感，留给下一次创作</h2>
+      <p>这里收集图片与视频提示词，也记录它们适合的画面、风格与模型。浏览精选作品，按分类寻找方向，再到提示词库复制适合自己的表达。</p>
+    </section>
   </main>
 
   <footer class="container site-footer">
     <p>为每一次创作，留下一点灵感。</p>
   </footer>
-  <noscript>请启用 JavaScript 以使用导航与主题切换。</noscript>
+  <noscript>请启用 JavaScript 以查看推荐提示词。</noscript>
 </body>
 </html>

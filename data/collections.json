@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "updatedAt": "2026-09-20",
+  "items": [
+    {
+      "id": "col-0001",
+      "title": "夜景与霓虹光影",
+      "description": "从雨夜街头到星空营地，收集适合营造深色电影氛围的场景提示词。用冷暖光影为画面增加叙事感。",
+      "cover": "assets/col-0001.jpg",
+      "coverColors": ["#14213D", "#00B4D8", "#D149A0"],
+      "tags": ["夜景", "霓虹", "电影感"],
+      "author": "灵感编辑部",
+      "createdAt": "2026-09-20",
+      "featured": true,
+      "itemIds": ["vid-0001", "img-0005", "img-0011", "vid-0003", "img-0006"]
+    },
+    {
+      "id": "col-0002",
+      "title": "商业产品图",
+      "description": "整理香水、腕表与科技产品的棚拍方案。通过材质、布光和构图，让商品成为画面的焦点。",
+      "cover": "assets/col-0002.jpg",
+      "coverColors": ["#1F2329", "#B7C4C3", "#D8B98A"],
+      "tags": ["商业摄影", "静物", "极简"],
+      "author": "灵感编辑部",
+      "createdAt": "2026-09-19",
+      "featured": true,
+      "itemIds": ["img-0004", "img-0008", "img-0014", "img-0020", "vid-0010"]
+    },
+    {
+      "id": "col-0003",
+      "title": "人像写真",
+      "description": "从窗边肖像到舞台与街头人物，寻找自然神态和鲜明气质的拍摄灵感。",
+      "cover": "assets/col-0003.jpg",
+      "coverColors": ["#D7B49E", "#B07962", "#4C3D45"],
+      "tags": ["人像", "自然光", "电影感"],
+      "author": "灵感编辑部",
+      "createdAt": "2026-09-18",
+      "featured": true,
+      "itemIds": ["img-0002", "img-0006", "img-0012", "img-0018", "vid-0009"]
+    },
+    {
+      "id": "col-0004",
+      "title": "动物与自然",
+      "description": "观察雪地、雨林和花田里的生命瞬间。用微距与长焦呈现动物的姿态和栖息环境。",
+      "cover": "assets/col-0004.jpg",
+      "coverColors": ["#2D6A4F", "#95B98F", "#E8D8B0"],
+      "tags": ["自然", "动物", "微距"],
+      "author": "灵感编辑部",
+      "createdAt": "2026-09-17",
+      "featured": true,
+      "itemIds": ["img-0003", "img-0007", "img-0013", "img-0019", "vid-0005", "vid-0002"]
+    },
+    {
+      "id": "col-0005",
+      "title": "美食摄影",
+      "description": "收集甜点、热食与烘焙的镜头表达。让食物的光泽、热气和纹理在画面中更诱人。",
+      "cover": "assets/col-0005.jpg",
+      "coverColors": ["#C97A2B", "#F2CC8F", "#D9485F"],
+      "tags": ["美食", "商业摄影", "暖光"],
+      "author": "灵感编辑部",
+      "createdAt": "2026-09-16",
+      "featured": false,
+      "itemIds": ["img-0009", "img-0015", "vid-0007", "vid-0006"]
+    },
+    {
+      "id": "col-0006",
+      "title": "建筑与空间",
+      "description": "从山谷里的图书馆到海边美术馆，探索建筑体量、材料与自然光的关系。",
+      "cover": "assets/col-0006.jpg",
+      "coverColors": ["#59636B", "#C9B79C", "#8B6B55"],
+      "tags": ["建筑", "空间", "光影"],
+      "author": "灵感编辑部",
+      "createdAt": "2026-09-15",
+      "featured": false,
+      "itemIds": ["img-0010", "img-0016", "vid-0008", "img-0005"]
+    }
+  ]
+}

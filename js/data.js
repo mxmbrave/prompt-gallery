@@ -9,6 +9,7 @@ window.PROMPTS_DATA = {
   "items": [
     {
       "id": "img-0001",
+      "featured": true,
       "title": "雾中的山间小屋",
       "type": "image",
       "prompt": "A quiet wooden cabin rests beside a mountain lake at dawn, photographed through a wide angle lens from the opposite shore. Soft diffused morning light filters through drifting mist, with muted pine greens and warm amber windows. Cinematic landscape photography, realistic wood textures, balanced composition, ultra detailed, high resolution, crisp foreground and atmospheric depth.",
@@ -34,6 +35,7 @@ window.PROMPTS_DATA = {
     },
     {
       "id": "img-0002",
+      "featured": true,
       "title": "窗边的温柔肖像",
       "type": "image",
       "prompt": "An adult woman wearing a cream linen shirt sits beside a tall studio window, captured with an eighty five millimeter portrait lens at eye level. Gentle side lighting shapes her face and creates subtle catchlights. Editorial portrait style, warm beige palette, natural skin texture, shallow depth of field, refined film grain, exceptional detail and high resolution image quality.",
@@ -59,6 +61,7 @@ window.PROMPTS_DATA = {
     },
     {
       "id": "img-0003",
+      "featured": true,
       "title": "雪地里的赤狐",
       "type": "image",
       "prompt": "A red fox stands quietly in fresh snow beneath dark spruce trees, captured from a low camera angle using a telephoto wildlife lens. Overcast winter light softly illuminates individual strands of orange fur. Documentary wildlife photography style, clean white background, gentle falling snow, precise eye focus, realistic anatomy, fine texture detail and professional high resolution quality.",
@@ -84,6 +87,7 @@ window.PROMPTS_DATA = {
     },
     {
       "id": "img-0004",
+      "featured": true,
       "title": "鼠尾草绿香水静物",
       "type": "image",
       "prompt": "A translucent sage green perfume bottle rests on a pale stone pedestal beside a single eucalyptus branch. Shoot with a macro product lens from a three quarter angle, using large softbox lighting and a narrow rim light. Minimal luxury advertising style, controlled glass reflections, delicate shadows, realistic stone pores, sharp label detail and pristine high resolution studio quality.",
@@ -109,6 +113,7 @@ window.PROMPTS_DATA = {
     },
     {
       "id": "vid-0001",
+      "featured": true,
       "title": "雨夜霓虹街头",
       "type": "video",
       "prompt": "An eight second continuous tracking shot moves slowly along a rainy city street at night, filmed with a thirty five millimeter lens at pedestrian eye level. Neon signs cast cyan and magenta light onto wet pavement while umbrellas pass naturally through frame. Cinematic noir style, realistic rain physics, stable camera motion, coherent reflections, detailed textures and clean four K video quality.",
@@ -259,6 +264,7 @@ window.PROMPTS_DATA = {
     },
     {
       "id": "img-0009",
+      "featured": true,
       "title": "春日草莓奶油塔",
       "type": "image",
       "prompt": "A delicate strawberry cream tart sits on a pale pink ceramic plate beside scattered blossoms, photographed from a slightly elevated angle with a fifty millimeter lens. Diffused morning light creates soft shadows and luminous fruit. Fresh spring food editorial style, glossy berries, airy cream texture, fine pastry crumbs, pastel background, elegant styling and appetizing high resolution detail.",
@@ -284,6 +290,7 @@ window.PROMPTS_DATA = {
     },
     {
       "id": "img-0010",
+      "featured": true,
       "title": "粗野主义山谷图书馆",
       "type": "image",
       "prompt": "A monumental brutalist library rises from a narrow mountain valley, viewed from the entrance plaza through a tilt shift architectural lens. Late afternoon sunlight grazes raw concrete walls and casts long geometric shadows. Contemporary architecture photography, human scale figures, precise vertical lines, restrained composition, realistic material weathering, atmospheric depth and ultra clean high resolution rendering.",
@@ -659,6 +666,7 @@ window.PROMPTS_DATA = {
     },
     {
       "id": "vid-0007",
+      "featured": true,
       "title": "清晨出炉的可颂",
       "type": "video",
       "prompt": "A seven second cinematic close up shows a baker opening a deck oven as golden croissants rise in gentle steam. The camera slides sideways with a fifty millimeter lens while warm oven light meets cool dawn light from the bakery window. Artisan food film, natural steam behavior, crisp laminated pastry layers, consistent hand motion, rich texture and clean four K video quality.",

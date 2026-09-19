@@ -105,6 +105,17 @@ const Store = (() => {
     return data.map(cloneItem);
   }
 
+  function getFeatured(category, limit) {
+    const matching = data.filter((item) => !category || category === "all"
+      || item.category === category);
+    const newestFirst = (first, second) =>
+      String(second.createdAt || "").localeCompare(String(first.createdAt || ""));
+    const featured = matching.filter((item) => item.featured === true).sort(newestFirst);
+    const others = matching.filter((item) => item.featured !== true).sort(newestFirst);
+    const count = Number.isFinite(limit) ? Math.max(0, Math.floor(limit)) : matching.length;
+    return [...featured, ...others].slice(0, count).map(cloneItem);
+  }
+
   function setFilter(key, value) {
     if (!Object.prototype.hasOwnProperty.call(defaults, key)) return;
     filters[key] = typeof value === "string" ? value : defaults[key];
@@ -168,7 +179,7 @@ const Store = (() => {
   }
 
   return Object.freeze({
-    setData, getData, setFilter, getFilters, clearFilters,
+    setData, getData, getFeatured, setFilter, getFilters, clearFilters,
     getFiltered, getPage, getFilterOptions,
     hexToRgb, rgbToLab, colorDistance, normalizeHex, matchesColor, normalizeTags,
     getLoadedPages: () => loadedPages

@@ -186,18 +186,6 @@ const UI = (() => {
     return favorite;
   }
 
-  // 用记录配色生成统一的 SVG 占位图，卡片和详情弹窗共用这一份逻辑。
-  function getPlaceholder(item = {}) {
-    const colors = Array.isArray(item.colors)
-      ? item.colors.filter((color) => /^#[0-9a-f]{6}$/i.test(color)) : [];
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480">
-      <rect width="640" height="480" fill="${escapeHTML(colors[0] || "#DFE4EF")}"/>
-      <circle cx="480" cy="130" r="180" fill="${escapeHTML(colors[1] || "#B9C5DC")}" opacity=".8"/>
-      <path d="M0 400 220 180 430 420 640 240V480H0Z" fill="${escapeHTML(colors[2] || "#8494B0")}" opacity=".8"/>
-    </svg>`;
-    return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
-  }
-
   function handleCardImageError(event) {
     const image = event.target;
     if (!image || image.tagName !== "IMG" || image.dataset.coverFallback === "true") return;
@@ -205,14 +193,14 @@ const UI = (() => {
     if (!card) return;
     const item = Store.getData().find((entry) => entry.id === card.dataset.id) || {};
     image.dataset.coverFallback = "true";
-    image.src = getPlaceholder(item);
+    image.src = getCoverPlaceholder(item);
     image.alt = `${String(item.title || "提示词")}的配色占位封面`;
     const label = card.querySelector(".cover-label");
     if (label) label.hidden = false;
   }
 
   function cardHTML(item) {
-    const placeholder = getPlaceholder(item);
+    const placeholder = getCoverPlaceholder(item);
     const hasCover = typeof item.cover === "string" && item.cover.trim() !== "";
     const cover = hasCover ? item.cover : placeholder;
     return `<article class="card" data-id="${escapeHTML(item.id)}" tabindex="0" role="button"
@@ -305,6 +293,6 @@ const UI = (() => {
   return Object.freeze({
     renderFilters, renderCards, appendCards, renderSkeleton, renderEmpty, updateResultCount,
     renderColorPresets, updateColorDraft, updateColorFeedback, toggleFavorite,
-    updateFavoriteButton, getPlaceholder
+    updateFavoriteButton, getPlaceholder: getCoverPlaceholder
   });
 })();

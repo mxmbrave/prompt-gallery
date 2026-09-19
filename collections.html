@@ -9,19 +9,61 @@
   <script src="js/config.js" defer></script>
   <script src="js/data.js" defer></script>
   <script src="js/store.js" defer></script>
+  <script src="js/cover.js" defer></script>
   <script src="js/favorites.js" defer></script>
+  <script src="js/collections-data.js" defer></script>
+  <script src="js/collections.js" defer></script>
   <script src="js/nav.js" defer></script>
 </head>
 <body>
   <header id="site-header" class="site-nav"></header>
 
-  <main class="container page-placeholder">
-    <h1>合集页，内容下一步实现</h1>
+  <main class="container collections-page">
+    <section id="collection-list-view" aria-labelledby="collections-title">
+      <div class="collections-hero">
+        <p class="eyebrow">主题精选 · 创作者整理</p>
+        <h1 id="collections-title" tabindex="-1">合集</h1>
+        <p class="muted">从一个主题出发，连续探索适合图片与视频创作的提示词。</p>
+      </div>
+
+      <div id="collection-tabs" class="collection-tabs" role="group" aria-label="合集视图">
+        <button class="collection-tab" type="button" data-collection-tab="featured" aria-pressed="true">精选合集</button>
+        <button class="collection-tab" type="button" data-collection-tab="mine" aria-pressed="false">我的合集</button>
+      </div>
+
+      <div class="collection-filter-row" role="group" aria-label="合集标签筛选">
+        <span class="collection-filter-label">标签</span>
+        <div class="collection-filter-options">
+          <div id="collection-tag-filters" class="collection-filter-scroll"></div>
+        </div>
+      </div>
+
+      <p id="collection-load-error" class="error-message" role="alert" hidden></p>
+      <div id="collection-grid" class="collection-grid" aria-busy="true"></div>
+      <p id="collection-empty" class="empty-state" role="status" hidden></p>
+    </section>
+
+    <section id="collection-detail-view" aria-labelledby="collection-detail-title" hidden>
+      <button id="collection-back" class="button collection-back" type="button">← 返回合集</button>
+      <div class="collection-detail-heading">
+        <div>
+          <p class="eyebrow">主题合集</p>
+          <h1 id="collection-detail-title" tabindex="-1"></h1>
+          <p id="collection-detail-description" class="muted"></p>
+          <p id="collection-detail-meta" class="collection-detail-meta"></p>
+        </div>
+        <div class="collection-save-area">
+          <button id="collection-save-all" class="button" type="button">全部收藏</button>
+          <p id="collection-save-status" class="sr-only" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <div id="collection-items-grid" class="cards-grid collection-items-grid"></div>
+    </section>
   </main>
 
   <footer class="container site-footer">
     <p>为每一次创作，留下一点灵感。</p>
   </footer>
-  <noscript>请启用 JavaScript 以使用导航与主题切换。</noscript>
+  <noscript>请启用 JavaScript 以查看与收藏合集。</noscript>
 </body>
 </html>
