@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="收集图片与视频创作灵感的 AI 提示词库">
+  <title>提示词库｜AI 提示词库</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- 普通脚本通过全局变量通信；defer 保证按顺序执行。 -->
+  <script src="js/config.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/store.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/detail.js" defer></script>
+  <script src="js/favorites.js" defer></script>
+  <script src="js/nav.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <header id="site-header" class="site-nav"></header>
+
+  <div class="library-search container">
+    <div class="site-header-search">
+      <label class="search-label" for="search-input">搜索提示词</label>
+      <div class="search-field">
+        <input id="search-input" type="search" placeholder="搜索标题、提示词、模型或标签…" autocomplete="off">
+        <button id="clear-search" class="search-clear" type="button" aria-label="清空搜索" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">灵感 · 收集 · 创作</p>
+      <h1 id="page-title">从一句提示词，开启创作。</h1>
+      <p class="muted">探索图片与视频提示词，找到下一次创作的灵感。</p>
+    </section>
+
+    <section class="filter-panel" aria-label="筛选">
+      <div id="type-filters" class="filter-row" role="group" aria-label="内容类型"></div>
+      <div id="filters" class="filter-groups"></div>
+      <!-- 此固定节点由 UI 放入颜色行，避免重新绑定面板内的事件。 -->
+      <section id="color-panel" class="color-panel" aria-labelledby="color-panel-title" hidden>
+        <h3 id="color-panel-title">自定义颜色</h3>
+        <p class="muted">选择或输入颜色预览，点击应用后筛选。</p>
+        <div id="color-presets" class="color-presets" role="group" aria-label="24 个彩色预设及黑白灰"></div>
+        <div class="color-inputs">
+          <label for="color-native">取色器</label>
+          <input id="color-native" type="color" value="#ff2d95">
+          <label for="color-hex">HEX 色值</label>
+          <input id="color-hex" type="text" value="#FF2D95" placeholder="#ff2d95 或 #f29"
+            autocomplete="off" spellcheck="false" aria-describedby="color-error" aria-invalid="false">
+        </div>
+        <div class="color-preview">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect id="color-preview-fill" width="24" height="24" fill="#FF2D95"/></svg>
+          <span id="color-preview-value">#FF2D95</span>
+        </div>
+        <p id="color-error" class="color-error" role="status" aria-live="polite" hidden>请输入有效的 HEX 色值，例如 #ff2d95 或 #f29。</p>
+        <div class="color-panel-actions">
+          <button id="color-apply" class="button" type="button">应用</button>
+          <button id="color-cancel" class="button" type="button">取消</button>
+        </div>
+      </section>
+      <button id="clear-filters" class="button" type="button">清空筛选</button>
+    </section>
+
+    <section class="results" aria-labelledby="results-title">
+      <div class="results-heading">
+        <h2 id="results-title">提示词精选</h2>
+        <p id="result-count" class="muted" role="status" aria-live="polite"></p>
+      </div>
+      <p id="load-error" class="error-message" role="alert" hidden></p>
+      <p id="color-no-results" class="empty-state" role="status" hidden>没有找到匹配的颜色，请调整或清空颜色筛选。下方保留其他条件下的卡片作为参考。</p>
+      <div id="cards-grid" class="cards-grid" aria-busy="false"></div>
+      <div class="load-more-wrap">
+        <button id="load-more" class="button" type="button" hidden>加载更多</button>
+        <p id="load-end" class="load-end" role="status" hidden>已经到底啦</p>
+      </div>
+      <p id="favorite-status" class="sr-only" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <div id="modal-overlay" class="modal-overlay" hidden>
+    <div id="modal-content" class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button id="modal-close" class="modal-close" type="button" aria-label="关闭详情">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <footer class="container site-footer">
+    <p>为每一次创作，留下一点灵感。</p>
+  </footer>
+  <noscript>请启用 JavaScript 以查看提示词与筛选功能。</noscript>
+</body>
+</html>

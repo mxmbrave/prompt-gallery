@@ -5,12 +5,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const clearSearchButton = document.getElementById("clear-search");
   const moreButton = document.getElementById("load-more");
   const loadEnd = document.getElementById("load-end");
-  const themeButton = document.getElementById("theme-toggle");
   const errorMessage = document.getElementById("load-error");
   const colorPanel = document.getElementById("color-panel");
   const colorHex = document.getElementById("color-hex");
   const colorNative = document.getElementById("color-native");
-  const themeKey = "prompt-gallery-theme";
   const urlFilters = [
     ["type", "type"], ["category", "category"], ["tag", "tag"],
     ["color", "color"], ["model", "model"], ["fav", "favorite"], ["q", "query"]
@@ -20,9 +18,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   let loadingMore = false;
   let ready = false;
   let displayedPages = 1;
-
-  document.title = CONFIG.siteName;
-  document.getElementById("site-name").textContent = CONFIG.siteName;
 
   function updateSearchClear() {
     clearSearchButton.hidden = searchInput.value.length === 0;
@@ -167,6 +162,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     event.preventDefault();
     event.stopImmediatePropagation();
     UI.toggleFavorite(button.dataset.favorite, button);
+    Nav.updateFavoriteCount();
   }, true);
 
   // inert 与 CSS 禁用之外再加事件保护，后续详情监听也不能打开未命中项。
@@ -206,30 +202,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 原卡片可能被标签筛选替换，将焦点交给新结果或搜索框。
     const nextCard = cardsGrid.querySelector('.card:not([inert])');
     (nextCard || searchInput).focus({ preventScroll: true });
-  });
-
-  function setTheme(theme) {
-    document.documentElement.dataset.theme = theme;
-    const dark = theme === "dark";
-    themeButton.setAttribute("aria-pressed", String(dark));
-    themeButton.textContent = dark ? "切换浅色" : "切换深色";
-  }
-
-  let initialTheme = "light";
-  try {
-    initialTheme = localStorage.getItem(themeKey) === "dark" ? "dark" : "light";
-  } catch {
-    // 本地存储不可用时使用浅色，按钮切换仍然有效。
-  }
-  setTheme(initialTheme);
-  themeButton.addEventListener("click", () => {
-    const theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    setTheme(theme);
-    try {
-      localStorage.setItem(themeKey, theme);
-    } catch {
-      // 保存失败不影响当前页面主题。
-    }
   });
 
   searchInput.addEventListener("input", () => {
