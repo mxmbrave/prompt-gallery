@@ -11,6 +11,8 @@
   <script src="js/data.js" defer></script>
   <script src="js/store.js" defer></script>
   <script src="js/cover.js" defer></script>
+  <script src="js/stats.js" defer></script>
+  <script src="js/clipboard.js" defer></script>
   <script src="js/ui.js" defer></script>
   <script src="js/detail.js" defer></script>
   <script src="js/favorites.js" defer></script>
@@ -70,7 +72,10 @@
     <section class="results" aria-labelledby="results-title">
       <div class="results-heading">
         <h2 id="results-title">提示词精选</h2>
-        <p id="result-count" class="muted" role="status" aria-live="polite"></p>
+        <div class="results-counts">
+          <p id="result-count" class="muted" role="status" aria-live="polite"></p>
+          <p id="stats-summary" class="stats-summary" title="统计仅保存在你自己的浏览器中"></p>
+        </div>
       </div>
       <p id="load-error" class="error-message" role="alert" hidden></p>
       <p id="color-no-results" class="empty-state" role="status" hidden>没有找到匹配的颜色，请调整或清空颜色筛选。下方保留其他条件下的卡片作为参考。</p>
@@ -80,6 +85,10 @@
         <p id="load-end" class="load-end" role="status" hidden>已经到底啦</p>
       </div>
       <p id="favorite-status" class="sr-only" role="status" aria-live="polite"></p>
+      <div class="submission-template-wrap">
+        <button id="copy-submission-template" class="button" type="button">复制提交模板</button>
+        <span id="submission-template-status" class="submission-template-status" role="status" aria-live="polite"></span>
+      </div>
     </section>
   </main>
 

@@ -6,12 +6,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   const moreButton = document.getElementById("load-more");
   const loadEnd = document.getElementById("load-end");
   const errorMessage = document.getElementById("load-error");
+  const statsSummary = document.getElementById("stats-summary");
+  const copySubmissionButton = document.getElementById("copy-submission-template");
+  const submissionTemplateStatus = document.getElementById("submission-template-status");
   const colorPanel = document.getElementById("color-panel");
   const colorHex = document.getElementById("color-hex");
   const colorNative = document.getElementById("color-native");
   const urlFilters = [
     ["type", "type"], ["category", "category"], ["tag", "tag"],
-    ["color", "color"], ["model", "model"], ["fav", "favorite"], ["q", "query"]
+    ["color", "color"], ["model", "model"], ["fav", "favorite"], ["sort", "sort"], ["q", "query"]
   ];
   let detailIdFromURL = new URLSearchParams(location.search).get("id") || "";
   let searchTimer;
@@ -22,6 +25,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function updateSearchClear() {
     clearSearchButton.hidden = searchInput.value.length === 0;
+  }
+
+  function updateStatsSummary() {
+    if (!statsSummary || typeof Stats === "undefined") return;
+    statsSummary.textContent = `共 ${Store.getData().length} 条提示词 · 你复制过 ${Stats.getTotalCopies()} 次`;
   }
 
   // 不校验参数是否存在于数据中；未知值保留，由筛选返回空结果。
@@ -42,7 +50,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const parameters = urlFilters.flatMap(([parameter, key]) => {
       const value = filters[key];
       // Store 用 all 表示全部类型，网址中省略这个默认值。
-      if (!value || (key === "type" && value === "all")) return [];
+      if (!value || (key === "type" && value === "all") || (key === "sort" && value === "default")) return [];
       return [`${encodeURIComponent(parameter)}=${encodeURIComponent(value)}`];
     });
     // 首页直达详情时，首次渲染及补齐分页期间保留 id。
@@ -94,6 +102,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     moreButton.hidden = !page.hasMore;
     loadEnd.hidden = page.hasMore || visibleTotal === 0;
     updateSearchClear();
+    updateStatsSummary();
     syncFiltersToURL();
   }
 
@@ -218,6 +227,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     UI.toggleFavorite(button.dataset.favorite, button);
     Nav.updateFavoriteCount();
   }, true);
+
+  // 收藏夹页面或其他标签页修改收藏后，同步当前库页的星标；只看收藏时重新计算结果。
+  document.addEventListener("favorites:changed", () => {
+    cardsGrid.querySelectorAll("button[data-favorite]").forEach((button) => {
+      UI.updateFavoriteButton(button, button.dataset.favorite);
+    });
+    Nav.updateFavoriteCount();
+    if (ready && Store.getFilters().favorite === "1") render();
+  });
+  document.addEventListener("stats:changed", updateStatsSummary);
+
+  if (copySubmissionButton) {
+    const template = `---
+类型：（图片 / 视频）
+分类：（场景 / 人物 / 动物 / 产品 / 食物 / 建筑 / 其他）
+模型：（例如 Midjourney v7 / Sora / 即梦）
+英文提示词：
+中文说明：
+样张链接：
+---`;
+    copySubmissionButton.addEventListener("click", async () => {
+      copySubmissionButton.disabled = true;
+      const copied = await copyTextToClipboard(template, document.body);
+      copySubmissionButton.disabled = false;
+      copySubmissionButton.textContent = copied ? "已复制模板" : "复制失败";
+      submissionTemplateStatus.textContent = copied
+        ? "提交模板已复制到剪贴板。"
+        : "复制失败，请手动复制模板。";
+      window.setTimeout(() => { copySubmissionButton.textContent = "复制提交模板"; }, 1500);
+    });
+  }
 
   // inert 与 CSS 禁用之外再加事件保护，后续详情监听也不能打开未命中项。
   function blockMutedCard(event) {

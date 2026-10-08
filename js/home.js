@@ -90,6 +90,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     type.className = "home-card-type";
     type.textContent = CONFIG.typeLabels[item.type] || item.type;
     cover.append(image, type);
+    if (item.featured === true) {
+      const featured = document.createElement("span");
+      featured.className = "home-card-featured";
+      featured.textContent = "精选";
+      cover.append(featured);
+    }
 
     const title = document.createElement("h3");
     title.textContent = item.title;

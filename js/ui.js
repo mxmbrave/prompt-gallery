@@ -44,10 +44,15 @@ const UI = (() => {
       ["category", "分类", options.categories],
       ["tag", "标签", options.tags],
       ["color", "颜色", options.colors],
-      ["model", "模型", options.models]
+      ["model", "模型", options.models],
+      ["sort", "排序", ["default", "newest", "copied"]]
     ];
     document.getElementById("filters").innerHTML = groups.map(([key, label, values]) => {
       const buttons = values.map((value) => {
+        if (key === "sort") {
+          const labels = { default: "默认", newest: "最新", copied: "我复制最多的" };
+          return filterButton(key, value, labels[value] || value, selected[key]);
+        }
         if (key !== "color") return filterButton(key, value, value, selected[key]);
         // SVG 颜色先校验并规范化，禁止任意属性或样式注入。
         const color = Store.normalizeHex(value) || "#808080";
@@ -68,7 +73,7 @@ const UI = (() => {
       return `<div ${key === "color" ? 'id="color-filter-row"' : ""}
         class="filter-row" role="group" aria-label="${escapeHTML(label)}">
         <span class="filter-label">${escapeHTML(label)}</span>
-        <div class="filter-options"><div class="filter-scroll">${filterButton(key, "", "全部", selected[key])}${buttons}${customButton}</div></div></div>`;
+        <div class="filter-options"><div class="filter-scroll">${key === "sort" ? "" : filterButton(key, "", "全部", selected[key])}${buttons}${customButton}</div></div></div>`;
     }).join("");
     document.getElementById("filters").insertAdjacentHTML("beforeend",
       `<div class="filter-row favorite-filter-row" role="group" aria-label="收藏">
@@ -158,6 +163,17 @@ const UI = (() => {
       aria-label="${escapeHTML(label)}">${favoriteIcon(favorite)}</button>`;
   }
 
+  function copyCountHTML(item) {
+    const count = typeof Stats !== "undefined" ? Stats.getCopyCount(item.id) : 0;
+    return count > 0
+      ? `<span class="copy-count" data-copy-count-for="${escapeHTML(item.id)}"
+          title="统计仅保存在你自己的浏览器中">你复制过 ${count} 次</span>` : "";
+  }
+
+  function featuredHTML(item) {
+    return item.featured === true ? `<span class="featured-badge">精选</span>` : "";
+  }
+
   function updateFavoriteButton(button, id, favorite = Favorites.isFavorite(id)) {
     if (!button) return;
     const title = button.dataset.title || "";
@@ -214,7 +230,8 @@ const UI = (() => {
       </div>
       <div class="card-body">
         <div class="card-meta"><span>${escapeHTML(CONFIG.typeLabels[item.type] || item.type)}</span>
-          <span>${escapeHTML(item.category)}</span><span>${escapeHTML(item.model)}</span></div>
+          <span>${escapeHTML(item.category)}</span><span>${escapeHTML(item.model)}</span>
+          ${featuredHTML(item)}${copyCountHTML(item)}</div>
         <h3>${escapeHTML(item.title)}</h3>
         <p class="card-description">${escapeHTML(item.promptZh)}</p>
         <div class="tags">${Store.normalizeTags(item.tags).map((tag) =>
@@ -277,6 +294,23 @@ const UI = (() => {
       : `共 ${Number(n) || 0} 条提示词`;
   }
 
+  function updateCopyCountBadges() {
+    if (typeof Stats === "undefined") return;
+    document.querySelectorAll(".card[data-id]").forEach((card) => {
+      const meta = card.querySelector(".card-meta");
+      if (!meta) return;
+      const id = card.dataset.id;
+      const count = Stats.getCopyCount(id);
+      let badge = meta.querySelector(".copy-count");
+      if (count > 0) {
+        if (!badge) { badge = document.createElement("span"); badge.className = "copy-count"; meta.append(badge); }
+        badge.dataset.copyCountFor = id;
+        badge.title = "统计仅保存在你自己的浏览器中";
+        badge.textContent = `你复制过 ${count} 次`;
+      } else if (badge) badge.remove();
+    });
+  }
+
   // 浏览器通常会自动保证焦点按钮可见；这里补一层兼容，避免滚动容器只滚页面不滚自身。
   document.addEventListener("focusin", (event) => {
     const button = event.target.closest?.(".filter-scroll .filter-button");
@@ -287,12 +321,13 @@ const UI = (() => {
     }
   });
   window.addEventListener("resize", updateFilterOverflowHints);
+  document.addEventListener("stats:changed", updateCopyCountBadges);
   const cardsGrid = document.getElementById("cards-grid");
   if (cardsGrid) cardsGrid.addEventListener("error", handleCardImageError, true);
 
   return Object.freeze({
     renderFilters, renderCards, appendCards, renderSkeleton, renderEmpty, updateResultCount,
     renderColorPresets, updateColorDraft, updateColorFeedback, toggleFavorite,
-    updateFavoriteButton, getPlaceholder: getCoverPlaceholder
+    updateFavoriteButton, updateCopyCountBadges, getPlaceholder: getCoverPlaceholder
   });
 })();

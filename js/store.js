@@ -3,7 +3,7 @@
 // 纯数据层：保存筛选条件与已加载页数，不依赖页面环境。
 const Store = (() => {
   const defaults = Object.freeze({
-    query: "", type: "all", category: "", tag: "", color: "", model: "", favorite: ""
+    query: "", type: "all", category: "", tag: "", color: "", model: "", favorite: "", sort: "default"
   });
   let data = [];
   let filters = { ...defaults };
@@ -92,7 +92,7 @@ const Store = (() => {
         console.warn(
           `提示词数据存在重复 id：${duplicates.join("、")}。` +
           "这可能导致详情打开错误记录、颜色反馈与收藏状态混淆。" +
-          "请同步修正 data/prompts.json 和 js/data.js 中的 window.PROMPTS_DATA。" +
+          "请修正 data/prompts.json 中的重复记录；js/data.js 只负责读取这个单一数据源。" +
           "本次仍按原顺序加载全部数据，未自动去重。"
         );
       }
@@ -118,7 +118,11 @@ const Store = (() => {
 
   function setFilter(key, value) {
     if (!Object.prototype.hasOwnProperty.call(defaults, key)) return;
-    filters[key] = typeof value === "string" ? value : defaults[key];
+    if (key === "sort" && !["default", "newest", "copied"].includes(value)) {
+      filters[key] = defaults[key];
+    } else {
+      filters[key] = typeof value === "string" ? value : defaults[key];
+    }
     loadedPages = 0;
   }
 
@@ -136,7 +140,7 @@ const Store = (() => {
     const query = filters.query.trim().toLocaleLowerCase();
     const favoriteIds = filters.favorite && typeof Favorites !== "undefined"
       ? new Set(Favorites.getAll()) : null;
-    return data.filter((item) => {
+    const filtered = data.filter((item) => {
       const searchable = [
         item.title, item.prompt, item.promptZh, item.model,
         item.category, item.author, ...item.tags
@@ -150,6 +154,18 @@ const Store = (() => {
         && (excludeDimension === "favorite" || !filters.favorite
           || Boolean(favoriteIds && favoriteIds.has(item.id)));
     }).map(cloneItem);
+    const sort = filters.sort;
+    if (sort === "newest") {
+      return filtered.map((item, index) => ({ item, index })).sort((a, b) =>
+        String(b.item.createdAt || "").localeCompare(String(a.item.createdAt || "")) || a.index - b.index
+      ).map(({ item }) => item);
+    }
+    if (sort === "copied" && typeof Stats !== "undefined") {
+      return filtered.map((item, index) => ({ item, index, count: Stats.getCopyCount(item.id) }))
+        .sort((a, b) => b.count - a.count || a.index - b.index)
+        .map(({ item }) => item);
+    }
+    return filtered;
   }
 
   // 页码从 1 开始；省略页码加载下一页，传 1 可重置到第一页。

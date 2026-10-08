@@ -12,6 +12,7 @@ const Detail = (() => {
   let closeTimer, closePromise, resolveClose;
   let generation = 0;
   const copyTimers = new Map();
+  const submissionURL = "https://github.com/mxmbrave/prompt-gallery/issues/new?template=prompt-submission.yml&title=%5B%E6%8F%90%E7%A4%BA%E8%AF%8D%5D%20";
 
   const text = (value) => typeof value === "string" ? value : "";
   const escapeHTML = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
@@ -68,6 +69,7 @@ const Detail = (() => {
     });
     // window 捕获先于 document 上的取色面板和搜索框处理。
     window.addEventListener("keydown", onKeyDown, true);
+    document.addEventListener("stats:changed", updateCopyStat);
     return true;
   }
 
@@ -129,6 +131,8 @@ const Detail = (() => {
           <button type="button" class="button" data-copy="all" ${copyText(item, "all") ? "" : "disabled"}>复制全部</button>
         </div>
         <p id="modal-copy-status" class="modal-copy-status" role="status" aria-live="polite"></p>
+        <p id="modal-copy-stat" class="modal-copy-stat" title="统计仅保存在你自己的浏览器中"></p>
+        <a class="modal-submit-link" href="${submissionURL}" target="_blank" rel="noopener">提交类似的提示词</a>
       </div>
     </div>`;
     const mediaElement = body.querySelector("img, video");
@@ -147,6 +151,16 @@ const Detail = (() => {
     };
     if (mediaElement) mediaElement.addEventListener("error", showMediaError);
     if (item.type === "video" && !video) showMediaError();
+    updateCopyStat();
+  }
+
+  function updateCopyStat() {
+    const stat = document.getElementById("modal-copy-stat");
+    if (!stat || !currentItem || typeof Stats === "undefined") return;
+    const count = Stats.getCopyCount(currentItem.id);
+    stat.textContent = count > 0
+      ? `你已复制过 ${count} 次 · 统计仅保存在你的浏览器中`
+      : "统计仅保存在你的浏览器中";
   }
 
   function stopMedia() {
@@ -230,28 +244,6 @@ const Detail = (() => {
     return kind === "prompt" || kind === "promptZh" ? text(item[kind]) : "";
   }
 
-  function fallbackCopy(value) {
-    let textarea;
-    const focused = document.activeElement;
-    try {
-      textarea = document.createElement("textarea");
-      textarea.className = "modal-copy-fallback";
-      textarea.value = value;
-      textarea.readOnly = true;
-      textarea.setAttribute("aria-label", "复制提示词临时文本");
-      content.append(textarea); // 放在弹窗内部，避免被背景 inert 禁用。
-      textarea.focus({ preventScroll: true });
-      textarea.select();
-      textarea.setSelectionRange(0, value.length);
-      return document.execCommand("copy");
-    } catch {
-      return false;
-    } finally {
-      if (textarea) textarea.remove();
-      if (focused && focused.isConnected) focused.focus({ preventScroll: true });
-    }
-  }
-
   async function copyPrompt(button) {
     if (button.disabled || !currentItem) return;
     const value = copyText(currentItem, button.dataset.copy);
@@ -261,26 +253,22 @@ const Detail = (() => {
     clearTimeout(copyTimers.get(button));
     button.disabled = true;
     let copied = false;
-    try {
-      if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
-        await navigator.clipboard.writeText(value);
-        copied = true;
-      }
-    } catch {
-      // API 不可用或权限被拒绝时，继续走 textarea 降级。
-    }
+    copied = await copyTextToClipboard(value, content);
     // 已关闭或切换到其他记录时，不再执行旧复制的降级与反馈。
     if (session !== generation || overlay.hidden || closing) return;
-    if (!copied) copied = fallbackCopy(value);
     button.disabled = false;
     const status = document.getElementById("modal-copy-status");
     status.classList.toggle("modal-copy-error", !copied);
     status.textContent = copied ? "已复制到剪贴板。" : "复制失败，请选中上方提示词后手动复制。";
     button.textContent = copied ? "已复制" : button.dataset.originalLabel;
-    if (copied) copyTimers.set(button, setTimeout(() => {
+    if (copied) {
+      if (typeof Stats !== "undefined") Stats.recordCopy(currentItem.id);
+      updateCopyStat();
+      copyTimers.set(button, setTimeout(() => {
       if (session === generation && button.isConnected) button.textContent = button.dataset.originalLabel;
       copyTimers.delete(button);
-    }, 1500));
+      }, 1500));
+    }
   }
 
   return Object.freeze({ open, close });

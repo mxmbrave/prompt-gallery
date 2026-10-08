@@ -140,12 +140,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function promptCard(item) {
     const article = element("article", "card collection-item-card");
+    article.dataset.id = item.id;
     const link = element("a", "collection-item-link");
     link.href = `library.html?id=${encodeURIComponent(item.id)}`;
     const cover = element("div", "card-cover");
     cover.append(imageFor(item, item.colors, "collection-item-image"));
     cover.append(element("span", "collection-item-type", CONFIG.typeLabels[item.type] || item.type));
     const body = element("div", "card-body");
+    const meta = element("div", "card-meta");
+    meta.append(element("span", "", CONFIG.typeLabels[item.type] || item.type));
+    if (item.featured === true) meta.append(element("span", "featured-badge", "精选"));
+    if (typeof Stats !== "undefined" && Stats.getCopyCount(item.id) > 0) {
+      const badge = element("span", "copy-count", `你复制过 ${Stats.getCopyCount(item.id)} 次`);
+      badge.title = "统计仅保存在你自己的浏览器中";
+      badge.dataset.copyCountFor = item.id;
+      meta.append(badge);
+    }
+    body.append(meta);
     body.append(element("h3", "", item.title));
     if (item.promptZh) body.append(element("p", "card-description", item.promptZh));
     const tags = element("div", "tags");
@@ -276,6 +287,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateSaveAllButton();
     Nav.updateFavoriteCount();
     saveStatus.textContent = favorite ? "已收藏提示词" : "已取消收藏提示词";
+  });
+
+  // 库页或收藏页修改提示词收藏后，同步合集详情中的星标和“全部收藏”状态。
+  document.addEventListener("favorites:changed", () => {
+    if (currentCollection) {
+      const items = CollectionStore.getItems(currentCollection);
+      detailGrid.querySelectorAll("button[data-prompt-favorite]").forEach((button) => {
+        const item = items.find((entry) => entry.id === button.dataset.promptFavorite);
+        if (item) setStar(button, Favorites.isFavorite(item.id), item.title, false);
+      });
+      updateSaveAllButton();
+    }
+    Nav.updateFavoriteCount();
+  });
+  document.addEventListener("stats:changed", () => {
+    if (!currentCollection || typeof Stats === "undefined") return;
+    detailGrid.querySelectorAll(".collection-item-card[data-id]").forEach((card) => {
+      const count = Stats.getCopyCount(card.dataset.id);
+      const meta = card.querySelector(".card-meta");
+      if (!meta) return;
+      let badge = meta.querySelector(".copy-count");
+      if (count > 0) {
+        if (!badge) { badge = element("span", "copy-count"); meta.append(badge); }
+        badge.textContent = `你复制过 ${count} 次`;
+        badge.title = "统计仅保存在你自己的浏览器中";
+      } else if (badge) badge.remove();
+    });
   });
 
   saveAllButton.addEventListener("click", () => {

@@ -3,6 +3,7 @@
 // 四个页面共用的顶部导航，只依赖 CONFIG 与 Favorites。
 const Nav = (() => {
   const themeKey = "prompt-gallery-theme";
+  const submissionURL = "https://github.com/mxmbrave/prompt-gallery/issues/new?template=prompt-submission.yml&title=%5B%E6%8F%90%E7%A4%BA%E8%AF%8D%5D%20";
   const pages = Object.freeze([
     ["index.html", "概览"],
     ["library.html", "提示词库"],
@@ -78,6 +79,7 @@ const Nav = (() => {
           ${pages.map(([filename, label]) => navLink(filename, label, current)).join("")}
         </nav>
         <div class="site-nav-actions">
+          <a class="site-nav-submit" href="${submissionURL}" target="_blank" rel="noopener">提交提示词</a>
           <button id="theme-toggle" class="button" type="button" aria-pressed="false">切换深色</button>
         </div>
       </div>
@@ -90,6 +92,7 @@ const Nav = (() => {
       const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
       setTheme(next, true);
     });
+    document.addEventListener("favorites:changed", updateFavoriteCount);
   }
 
   return Object.freeze({ init, setTheme, updateFavoriteCount });

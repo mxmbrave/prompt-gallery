@@ -3,25 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="收集图片与视频创作灵感的 AI 提示词库">
+  <meta name="description" content="整理与管理收藏的 AI 图片和视频提示词">
   <title>我的收藏｜AI 提示词库</title>
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/config.js" defer></script>
   <script src="js/data.js" defer></script>
   <script src="js/store.js" defer></script>
+  <script src="js/cover.js" defer></script>
+  <script src="js/stats.js" defer></script>
   <script src="js/favorites.js" defer></script>
+  <script src="js/favorites-page.js" defer></script>
   <script src="js/nav.js" defer></script>
 </head>
 <body>
   <header id="site-header" class="site-nav"></header>
-
-  <main class="container page-placeholder">
-    <h1>我的收藏页，内容下一步实现</h1>
+  <main class="container favorites-page">
+    <section class="favorites-hero" aria-labelledby="favorites-title">
+      <p class="eyebrow">收藏 · 整理 · 回看</p>
+      <h1 id="favorites-title" tabindex="-1">我的收藏</h1>
+      <p class="muted">把喜欢的提示词放进不同收藏夹，随时继续创作。</p>
+    </section>
+    <div class="favorites-toolbar">
+      <label for="favorites-search">搜索收藏</label>
+      <input id="favorites-search" type="search" placeholder="搜索标题、提示词、备注或标签…" autocomplete="off">
+      <button id="favorites-export" class="button" type="button">导出 JSON</button>
+      <button id="favorites-import" class="button" type="button">导入 JSON</button>
+      <input id="favorites-import-file" type="file" accept=".json,application/json" hidden>
+    </div>
+    <p id="favorites-status" class="sr-only" role="status" aria-live="polite"></p>
+    <div class="favorites-layout">
+      <aside class="favorites-sidebar" aria-label="收藏夹">
+        <h2>收藏夹</h2>
+        <div id="favorites-folders" class="favorites-folder-scroll"></div>
+        <button id="create-folder" class="button" type="button">新建收藏夹</button>
+      </aside>
+      <section class="favorites-content" aria-labelledby="favorites-current-title">
+        <div class="favorites-content-heading">
+          <h2 id="favorites-current-title">全部收藏</h2>
+          <span id="favorites-current-count" class="muted"></span>
+        </div>
+        <div id="favorites-grid" class="cards-grid favorites-grid" aria-busy="true"></div>
+        <p id="favorites-empty" class="empty-state" role="status" hidden></p>
+      </section>
+    </div>
   </main>
-
-  <footer class="container site-footer">
-    <p>为每一次创作，留下一点灵感。</p>
-  </footer>
-  <noscript>请启用 JavaScript 以使用导航与主题切换。</noscript>
+  <footer class="container site-footer"><p>为每一次创作，留下一点灵感。</p></footer>
+  <noscript>请启用 JavaScript 以管理收藏。</noscript>
 </body>
 </html>
