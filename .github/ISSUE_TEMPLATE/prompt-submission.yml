@@ -1,0 +1,61 @@
+name: 提交提示词
+description: 分享一条图片或视频提示词
+title: "[提示词] "
+labels:
+  - prompt-submission
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢分享！请尽量填写完整信息，方便整理和审核。
+  - type: dropdown
+    id: type
+    attributes:
+      label: 类型
+      options:
+        - 图片
+        - 视频
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 分类
+      options:
+        - 场景
+        - 人物
+        - 动物
+        - 产品
+        - 食物
+        - 建筑
+        - 其他
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: 模型
+      description: 例如 Midjourney v7、Sora、即梦
+      placeholder: Midjourney v7
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: 英文提示词
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: prompt-zh
+    attributes:
+      label: 中文说明
+  - type: input
+    id: sample-url
+    attributes:
+      label: 样张链接
+      description: 可填写公开图片或视频链接
+  - type: textarea
+    id: notes
+    attributes:
+      label: 补充说明
