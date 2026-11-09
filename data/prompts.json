@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-16",
+  "updatedAt": "2026-11-10",
   "items": [
     {
       "id": "img-0001",
@@ -759,6 +759,58 @@
       "author": "灵感编辑部",
       "sourceUrl": "",
       "createdAt": "2026-08-18"
+    },
+    {
+      "id": "img-0021",
+      "title": "梵高展览｜线圈与黑白剪影海报",
+      "type": "image",
+      "prompt": "Build an avant-garde visual design around any theme through a collision between two opposing upper and lower poles. Deconstruct the subject into a wildly tangled cloud of continuous looping lines above and a heavy, enclosed, solid-black silhouette base below. At first glance, arrest the eye with repeatedly entangled, highly saturated coils against a bright white field and isolated high-contrast black-and-white fragments piercing through their gaps. Then direct the gaze downward through the converging V-shaped junction at the center, into the dense black mass occupying the lower half, finally resting on a cluster of slender handwritten lettering reversed out in white within the black form.\n\nOrganize the composition as an approximately equal upper/lower confrontation of visual weight. The upper half radiates outward, leaving generous clean white breathing room at the four corners; the lower half presses against the bottom and both sides like a heavy boulder. Break static central symmetry through slightly offset, asymmetric sweeping loops and fragments staggered in height. Two signature gestures are essential. First, dissolve the subject's upper outline completely into a wild hand-drawn tangle of a single continuously wandering line, layered crossings, and knots. Let stroke thickness breathe with drawing speed, with fine mist-like dry-brush flecks flung outward. Never reduce this to orderly geometric concentric circles or smooth, lifeless lines of uniform weight. Second, insert two or three isolated, high-contrast black-and-white fragments of distinctive features beneath and between the densely interwoven colored coils, as if collaged. Retain a very narrow bright white margin around each fragment to separate it from the colored lines. Vary the scale and tilt subtly between left and right fragments. Do not turn them into a complete, continuous realistic subject or patches of color blended into the linework.\n\nAt the central junction, a crisp V-shaped notch receives the descending coils, then cuts into a large opaque, solid-black lower mass that acts as a blackboard-like base for all typography. Embed the entire typographic system slightly below the center of this black base, gathered into a compact rectangular text block with approximately aligned left and right edges. Its width should occupy about fifty to sixty percent of the black mass, surrounded by a thick pure-black margin. Precisely align the text block's central axis with the upper notch and core fragments. Use exceptionally thin, single-line, hand-drawn condensed lettering with tall, narrow proportions throughout. Strokes should be fine and elongated like steel-needle scratches, with a slight natural hand tremor while remaining upright and orderly, creating an extreme contrast between delicate lettering and the heavy black field.\n\nStack the lettering tightly into four to six horizontal lines of similar length. Keep letter spacing compact while leaving clear breathing gaps between words. Compress line spacing until adjacent strokes almost touch without actually meeting, so dense vertical strokes weave a fence-like rhythm against black. Make one line slightly below the middle about twenty percent smaller, and split its ending into a two-tier miniature combination of small words or numbers. Set ordinal suffixes smaller and raised at the upper right of their numerals. Give hyphens and numerical symbols the same fine hand-drawn quality. Derive all copy naturally from the theme.\n\nKeep surfaces smooth, crisp, matte, and clean, with extreme flat silhouette contrast and no three-dimensional diffuse shadows. Extract the accent hue from the theme's emotional tension and core material character, strictly limiting the design to three high-contrast colors: a bright white field occupying about forty percent of the area and also serving as the reversed lettering color below; a very low-value dense black occupying about forty-five percent, forming the lower base and the structural black-and-white fragments above; and a single highly saturated, emotionally charged accent occupying about fifteen percent, reserved for the wild continuous coils and peripheral flecks. Create a stark collision of bright white field, dense black base, and saturated coils. Preserve the mechanism of chaotic colored coils wrapping black-and-white collaged fragments and colliding with a lower solid-black base of reversed handwritten typography. Avoid a conventional, complete realistic portrait illustration or ordinary typography floating on a light background.\n\nTheme: a Van Gogh exhibition event poster.\nUse: event poster.\nAspect ratio: 9:16.\nWrite suitable poster copy.",
+      "promptZh": "围绕任意主题内容建立上下两极对撞的先锋视觉设计：让主题形象被拆解为上部狂乱盘绕的连续线条云团与下部沉重封闭的浓黑剪影基座，第一眼先被亮白底场上反复缠绕的高纯度线圈以及从线圈缝隙里刺出的高反差黑白局部切片死死抓住，视线随即顺着中部收束的V形交界切口下坠，沉入占满下半场的浓黑大块面，最终停留在黑块腹腔中央反白刻出的瘦长手写字群上。版面按上下约五五开的重量对峙组织，上半部向外发散扩张、四角留出充裕的洁净亮白呼吸空间，下半部则像沉重巨石般贴紧底边与两侧，靠左右略带不对称偏移的狂乱大弧圈与高低错落的局部切片打破居中呆板。最具辨识度的独门动作有二：其一是将主题上端的外轮廓彻底打散为一团单线连续游走、多层交叉打结的狂乱手绘线圈，线条粗细随运笔速度产生呼吸变化，并在外围甩出细密的雾状飞白小点，绝不能退化成规整的几何同心圆或平滑呆板的均匀细线；其二是在密集交织的彩色线圈底层与空隙间，像剪贴般嵌入两三处孤立的高反差黑白局部特征切片，每处切片四周保留一圈极窄的亮白留边以与彩色线条剥离，左右切片在尺度与倾角上保持微妙错动，不能退化成完整写实的连续形象或与线条混涂在一起的色块。中部交界处以利落的V形缺口承接上部下探的线圈，随即切入下半部大面积不透光的浓黑实心块面，将其作为承载全部文字的黑板式底座。排版系统严格内嵌于下半部浓黑基座的中心偏下区域，收拢为一个左右边界近似齐平的紧凑箱形文字块，横向宽度约占黑块五至六成，四周留出厚重的纯黑包裹带，且文字块中轴线与上部交界缺口及核心切片严密对位。文字全部采用瘦高字身的特细单线手绘窄体结构，笔画纤细修长如钢针刮擦，略带手写生理微颤而保持端正直立，与浓黑底场形成极端的纤细与厚重反差。整组文字按四至六行横排紧密叠放，行长彼此接近，字距紧凑而词间留出清晰气口，行距压缩到上下笔画几乎相接却互不触碰，使密集的竖直长笔画在黑底上编织出栅栏般的纵向节奏；中间偏下的一行稍微缩减字号约两成，并在该行末尾切分出上下双层微缩并列的小字或数字组合，序数后缀缩小高悬于数字右上角，短横线与数字符号保持同等细线手绘质感，全部文字内容由主题自然生发。整体表面平滑利落、哑光洁净，明暗呈极端的平面剪影反差，不设三维立体漫射阴影。色彩从主题自身的情绪张力与核心材质中提取色相，严格锁定三色高反差秩序：亮白底场占约四成面积并兼任下部反白文字色，极低明度的浓黑占约四成半面积承担下部基座与上部局部切片骨骼，单一高纯度、强情绪张力的主题强调色占约一成半面积，专门赋予上部狂乱盘绕的连续线圈与外围飞点，形成“亮白底场—浓黑基座—高纯度线圈”的冷峻冲撞。整体必须保留“狂乱彩色线圈裹挟黑白剪贴切片并与下部浓黑反白手写字基座对撞”的视觉机制，避免变成完整写实的常规肖像插画或文字浮于浅底的普通排版。\n\n主题：梵高展览活动海报\n用途：活动海报\n比例9:16\n文案自拟",
+      "negativePrompt": "",
+      "model": "GPT-image2.5",
+      "category": "设计",
+      "tags": [
+        "梵高",
+        "海报设计",
+        "手绘线条",
+        "艺术展览"
+      ],
+      "colors": [
+        "#F7F2E8",
+        "#0B0A07",
+        "#C9C4BB"
+      ],
+      "cover": "assets/img-0021.jpg",
+      "video": null,
+      "author": "灵感编辑部",
+      "sourceUrl": "",
+      "createdAt": "2026-10-08"
+    },
+    {
+      "id": "img-0022",
+      "title": "小雪｜克制的触感节气海报",
+      "type": "image",
+      "prompt": "Build a restrained, quiet, tactile editorial visual around any theme. Let close-up details from realistic photography carry the subject, with an enlarged fragment entering the lower portion of the composition. Make surface texture, light, and occlusion create the first visual event. Leave a dark open field above so typography becomes a second clear source of visual weight. Guide the eye first to the large title on the left, then through a smaller explanation into information distributed across both sides, before the vertical lettering on the right draws it toward the subject image below and a compact conclusion along the bottom edge.\n\nMaintain a tonal order of spacious emptiness above and substantial imagery below. Crop the subject's contours naturally according to its structure, allowing details and the whole to suggest each other. Leave explicit breathing room between image edges and typography. The key gesture is a narrow, elongated vertical text element standing on the right in a relatively low-value color, confronting the title on the left across the open space. Within the image, theme-related forms should overlap, touch, or press against one another so their tactile relationships become the narrative core. Do not reduce the layout to a centered product display with an ordinary title added beside it.\n\nDevelop the typography along a stable left alignment axis. Place a miniature mark and short date-like information at opposite ends of the top. Set the main title in tightly stacked lines using a high-contrast serif or another typeface with distinctly contrasting thick and thin strokes. Reduce the English or supporting text beneath it by one level, with shorter lines and slightly looser leading. Large, subdued vertical words on the right form a lateral support. Stagger Chinese text groups and explanatory passages across the middle left and right; use leading symbols as a subtle rhythmic device. Pair small information along the bottom with enlarged numerals or a key phrase to create a closing band close to the imagery. Keep all lettering legible within its actual writing system. Establish character through clear stroke contrast, upright structure, crisp terminals, and restrained spacing. Use horizontal and vertical arrangements to create directional contrast, with distinct size hierarchies and relationships established through alignment, offsets, and negative space.\n\nExtract hues from the theme's materials, emotion, or meaning. Let the dark background dominate, the image hold midtones and natural tonal layers, and the main text use a clear high-value color. Lower the value of the large side lettering. Reserve accents for highlights or essential details in the subject image. Keep saturation restrained and tonal steps clear, with color temperature determined by the theme. Use soft side lighting in the photography to shape surface relief. Keep the background flat and matte, photographic details clear, and typographic edges crisp. Preserve the combined mechanism of dark negative space, opposing left/right typographic weight, a close-up tactile image below, and a concluding information band along the bottom. Avoid an ordinary product display or an evenly filled explanatory layout.\n\nTheme: Xiaoxue (Minor Snow), one of the twenty-four solar terms.\nUse: a twenty-four solar terms poster.\nOrganize and develop additional relevant information and knowledge points.\nThe overall design should be minimal but not simplistic, with the quality of an award-winning poster.",
+      "promptZh": "围绕任意主题内容建立克制、安静而有触感的编辑视觉，让主题由近距离的真实摄影细节承载，主体以放大的局部进入下方画面，借表面质地、光线与遮挡形成第一眼事件；上方留出深色空场，让文字成为另一股清晰的视觉重量。视线先落在左侧的大号标题，再沿较小的说明进入两侧分散的信息，最后被右侧竖排字牵引至下方主题影像，停在底边的紧凑收束处。保持上方留白宽阔、下方图像厚实的明暗秩序，让主题对象的轮廓随自身结构自然裁切，局部与整体互相提示，影像边缘和文字留出明确呼吸间隔。关键动作是让一处窄长的竖排字以较低明度立在右侧，与左侧标题隔空对峙；影像内部则以主题相关的形态相互遮挡、接触或压叠，使触感关系成为叙事核心，不能退化成主体居中陈列、旁边附加普通标题。排版沿稳定的左侧起始轴展开，顶部微型标记与日期类短信息分占两端，主标题以高对比衬线或具有明确粗细反差的字形分行紧排；下方英文或辅助文字缩小一级，行长收短，行距稍松。右侧竖排短词以大字号和压暗字色形成侧向支柱，中文字组与说明文字在中部左右错开，行首符号作为轻微节拍，底边的小字信息与放大的数字或关键短语并置，组成贴近影像的收尾带。所有文字依据实际书写系统保持易读，字形以鲜明粗细对比、挺拔骨架、利落收笔和克制字距建立气质；横排与竖排形成方向差，大小层级明确，块面之间靠对齐、错位和留白建立联系。色相从主题自身的材质、情绪或语义中提取，深色背景占主导，影像承载中间明度与自然层次，文字取清亮的高明度阶，侧向大字压低明度，强调只在主题影像的亮部或关键细节出现；整体纯度克制，明暗台阶清楚，温度随主题而定。摄影光线以柔和侧光塑造表面起伏，背景平整哑光，影像细节清楚，文字边缘洁净利落。整体必须保留深色留白、左右文字重量对峙、下方近景触感影像与底边信息收束共同构成的视觉机制，避免变成普通产品陈列或平均铺满的说明版面。\n\n主题：小雪\n用途：二十四节气海报\n其他信息，知识点，你帮我梳理发挥\n整体设计，简约但不简单，获奖级海报作品水平。",
+      "negativePrompt": "",
+      "model": "GPT-image2.5",
+      "category": "设计",
+      "tags": [
+        "小雪",
+        "二十四节气",
+        "海报设计",
+        "编辑排版"
+      ],
+      "colors": [
+        "#EAE9E5",
+        "#A8B8C9",
+        "#7998B5"
+      ],
+      "cover": "assets/img-0022.jpg",
+      "video": null,
+      "author": "灵感编辑部",
+      "sourceUrl": "",
+      "createdAt": "2026-10-08"
     }
   ]
 }
