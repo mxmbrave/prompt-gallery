@@ -776,9 +776,9 @@
         "艺术展览"
       ],
       "colors": [
-        "#F7F2E8",
-        "#0B0A07",
-        "#C9C4BB"
+        "#030303",
+        "#FBFBFE",
+        "#4659F8"
       ],
       "cover": "assets/img-0021.jpg",
       "video": null,
@@ -802,9 +802,9 @@
         "编辑排版"
       ],
       "colors": [
-        "#EAE9E5",
-        "#A8B8C9",
-        "#7998B5"
+        "#0E1714",
+        "#574537",
+        "#363936"
       ],
       "cover": "assets/img-0022.jpg",
       "video": null,
