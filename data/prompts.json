@@ -784,7 +784,8 @@
       "video": null,
       "author": "灵感编辑部",
       "sourceUrl": "",
-      "createdAt": "2026-10-08"
+      "createdAt": "2026-10-08",
+      "featured": true
     },
     {
       "id": "img-0022",
@@ -810,7 +811,8 @@
       "video": null,
       "author": "灵感编辑部",
       "sourceUrl": "",
-      "createdAt": "2026-10-08"
+      "createdAt": "2026-10-08",
+      "featured": true
     }
   ]
 }

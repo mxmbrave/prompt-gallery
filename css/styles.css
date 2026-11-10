@@ -136,7 +136,8 @@ body.modal-open { overflow: hidden; overscroll-behavior: none; }
 .modal-close:hover { background: var(--card-hover); }
 .modal-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 .modal-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-.modal-media { min-width: 0; display: flex; align-items: center; justify-content: center; padding: 24px; border-radius: 18px 0 0 18px; background: var(--bg); }
+/* 长提示词会拉高整行，媒体顶部对齐，避免打开详情时封面落在屏幕之外。 */
+.modal-media { min-width: 0; display: flex; align-items: flex-start; justify-content: center; padding: 24px; border-radius: 18px 0 0 18px; background: var(--bg); }
 .modal-media img, .modal-media video { display: block; width: 100%; max-height: 75vh; object-fit: contain; border-radius: 10px; }
 .modal-media-status { padding: 32px 12px; color: var(--text-muted); text-align: center; }
 .modal-text { min-width: 0; padding: 64px 28px 28px; }
